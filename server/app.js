@@ -1,24 +1,22 @@
-// Load modules to create an http server, parse a URL and parse a URL query.
-import http from "http";
-import { URL } from "url";
-import { parse } from "querystring";
+const http = require("http");
+const url = require("url");
+const { load } = require("./load.js");
 
-// Provide the origin for relative URLs sent to Node.js requests.
-const serverOrigin = "http://localhost:8000";
+const port = 4040;
+const server = http.createServer((req, res) => {
+  const { from = 0, to = 100 } = url.parse(req.url, true).query;
 
-// Configure our HTTP server to respond to all requests with a greeting.
-const server = http.createServer((request, response) => {
-  // Parse the request URL. Relative URLs require an origin explicitly.
-  const url = new URL(request.url, serverOrigin);
-  // Parse the URL query. The leading '?' has to be removed before this.
-  const { name } = parse(url.search.substring(1));
+  res.writeHead(200, {
+    "Content-Type": "text/html",
+    "Access-Control-Allow-Origin": "*",
+  });
 
-  response.writeHead(200, { "Content-Type": "text/plain" });
-  response.end(`Hello, ${name}!\n`);
+  const response = JSON.stringify(load(from, to));
+  setTimeout(() => {
+    res.end(response);
+  }, Math.random() * 500 + 300);
 });
 
-// Listen on port 8000, IP defaults to 127.0.0.1.
-server.listen(8000, () => {
-  // Print a friendly message on the terminal.
-  console.log(`Server running at ${serverOrigin}/`);
+server.listen(port, () => {
+  console.log(`Server running at http://localhost:${port}/`);
 });
