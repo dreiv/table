@@ -1,0 +1,24 @@
+@mixin box($width, $height: $width) {
+  width: $width;
+  height: $height;
+}
+
+@mixin margin-vert($top, $bottom: $top) {
+  margin-top: $top;
+  margin-bottom: $bottom;
+}
+
+@mixin margin-horiz($left, $right: $left) {
+  margin-right: $right;
+  margin-left: $left;
+}
+
+@mixin padding-vert($top, $bottom: $top) {
+  padding-top: $top;
+  padding-bottom: $bottom;
+}
+
+@mixin padding-horiz($left, $right: $left) {
+  padding-right: $right;
+  padding-left: $left;
+}

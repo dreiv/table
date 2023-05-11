@@ -1,0 +1,15 @@
+$z-indices: (
+    "menu": (
+        "items": 2,
+        "social": 3,
+    ),
+    "main-content": 1,
+    "footer": -1,
+);
+
+@function ind($element, $sub-element: false){
+    $index: map-get($z-indices, $element);
+    @if $sub-element{ $index: map-get($index, $sub-element); }
+
+    @return $index;
+}

@@ -1,0 +1,10 @@
+@import './box';
+
+@mixin circle($size, $background-color) {
+  @include box($size);
+  border-radius: 50%;
+
+  @if ($background-color) {
+    background-color: $background-color;
+  }
+}

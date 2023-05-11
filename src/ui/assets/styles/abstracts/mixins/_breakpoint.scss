@@ -1,0 +1,24 @@
+$breakpoints: (
+  // ~512px
+  xs: 32rem,
+  // ~768px
+  sm: 48rem,
+  // ~1024px
+  md: 64rem,
+  // ~1280px
+  lg: 80rem,
+  // ~1440px
+  xl: 90rem
+);
+
+@mixin breakpoint($point) {
+  @if map-has-key($breakpoints, $point) {
+    $breakpoint-value: map-get($breakpoints, $point);
+
+    @media (min-width: $breakpoint-value) {
+      @content;
+    }
+  } @else {
+    @warn 'Invalid breakpoint: #{$point}.';
+  }
+}
